@@ -1,0 +1,50 @@
+.testContainerMap {
+    /* padding: 2em */
+}
+
+.testTooltip {
+    background-color: rgba(0,0,0,.8);
+    color: #fff;
+    font-size: 13px;
+    max-width: 300px;
+    padding-left: 3px;
+    padding-right: 3px;
+    z-index: 1;
+    position: absolute;
+    pointer-events: none;
+}
+
+.layersSelectorContainer {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    max-height: 450px;
+    height: auto;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px rgba(31,51,73,.40);
+    overflow-wrap: break-word;
+    word-break: break-all;
+    
+    max-width: 200px;
+    width: 100%;
+}
+
+.legendButton {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+}
+
+@media only screen and (max-width: 1024px) {
+    .layersSelectorContainer {
+        max-width: 180px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .layersSelectorContainer {
+        max-width: 150px;
+    }
+}

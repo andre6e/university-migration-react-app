@@ -1,0 +1,41 @@
+.layerSelector {
+    padding: 0px 10px 10px 10px;
+}
+
+.circleDot {
+    border-radius: 50%;
+    height: 13px;
+    width: 13px;
+}
+
+.regionRowContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1px;
+}
+
+.regionNameContainer {
+    margin-left: 5px;
+}
+
+.legendSubTitle {
+    margin-top: 0;
+    color: gray;
+}
+
+.legendTitle {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+    .layerSelector {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .layerSelector {
+        font-size: 11px;
+    }
+}

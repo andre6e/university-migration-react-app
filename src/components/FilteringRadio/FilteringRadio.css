@@ -1,0 +1,31 @@
+.card-container {
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.TO {
+    border: 1px solid #c67100;
+}
+
+.FROM {
+    border: 1px solid #ffa000;
+}
+
+.filter-component-container {
+    max-width: 500px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-right: 10px;
+    flex: 1;
+}
+
+@media only screen and (max-width : 768px) {
+    .filter-component-container {
+        width: 100%;
+        margin-right: 0px;
+    }
+
+    .range-container {
+        width: 100%;
+    }
+}

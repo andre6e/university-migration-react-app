@@ -1,0 +1,37 @@
+.filtering-box-container {
+    /* border: 2px solid #ffa000; */
+}
+
+.filter-components-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.filtering-box-title {
+    text-align: center;
+}
+
+@media only screen and (max-width : 768px) {
+    .filter-components-container {
+        flex-direction: column;
+    }
+}
+
+.range-container {
+    margin: 0 auto;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    max-width: 500px;
+}
+
+.input-range__slider {
+    background: grey !important;
+    border: 1px solid grey !important;
+}
+
+.input-range__track--active {
+    background: darkgray !important;
+}

@@ -1,0 +1,12 @@
+.layout {
+    /* border: 2px solid #c67100; */
+    /* padding-right: 300px; */
+}
+
+.gridLayoutContainer {
+    margin-top: 1em;
+}
+
+.widget {
+    border: 1px solid lightgrey;
+}
