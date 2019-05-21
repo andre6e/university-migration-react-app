@@ -41,6 +41,10 @@ class StackedColumnChart extends Component {
         // Create X axes
         let valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
         valueAxis.renderer.grid.template.opacity = 0;
+        valueAxis.renderer.ticks.template.strokeOpacity = 0.5;
+        valueAxis.renderer.ticks.template.stroke = am4core.color("#495C43");
+        valueAxis.renderer.line.strokeOpacity = 0.5;
+        valueAxis.renderer.baseGrid.disabled = true;
         
         // Legend (buttons per disattivare series)
         chart.legend = new am4charts.Legend();
@@ -90,7 +94,6 @@ class StackedColumnChart extends Component {
 
     // Remove series if needed (in order to update the chart legend)
     _onChartDataValidated() {
-        debugger;
         if (this.seriesToRemoveKeys.length) {
            while (this.seriesToRemoveKeys.length > 0) {
                 let keyToRemove = this.seriesToRemoveKeys.pop();
@@ -120,7 +123,6 @@ class StackedColumnChart extends Component {
         const newSeries = Object.keys(conf.series);
 
         if (oldSeries.sort().join() !== newSeries.sort().join()) {
-            debugger;
             // Checks series to remove
             let chartSeriesLength = this.chart.series.length;
             for (let i = 0; i < chartSeriesLength ; i++) {

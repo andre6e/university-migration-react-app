@@ -31,8 +31,7 @@ class MyGridLayout extends Component {
                     layouts={GRID_LAYOUT_CONFIG.LAYOUTS}
                     breakpoints={GRID_LAYOUT_CONFIG.BREAKPOINTS}
                     cols={GRID_LAYOUT_CONFIG.COLS}
-                    margin={GRID_LAYOUT_CONFIG.MARGIN}
-                >
+                    margin={GRID_LAYOUT_CONFIG.MARGIN}>
 
                     <div className="widget" key={WIDGET_KEYS.ARCHMAP}>
                         <ArchMap data={archLayersData.data} conf={archLayersData.conf}/>

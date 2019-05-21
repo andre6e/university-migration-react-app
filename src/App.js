@@ -25,7 +25,8 @@ const initialState = {
   },
 
   ARCH_LAYERS_DATA: emptyArchLayersData,
-  STACKED_COLUMN_DATA: stackedColumnEmptyData,
+  STACKED_COLUMN_DATA: stackedColumnData,
+  // STACKED_COLUMN_DATA: stackedColumnEmptyData,
   CHORD_MOCK_DATA: chordEmptyData,
 };
 
