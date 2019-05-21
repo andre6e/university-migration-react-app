@@ -22,7 +22,7 @@ class MyGridLayout extends Component {
     // }
 
     render() {
-        const { archLayersData, stackedColumnData, chordDiagramData, chordDiagramConf } = this.props;
+        const { archLayersData, stackedColumnData, chordDiagramData } = this.props;
         
         return (
             <div className="gridLayoutContainer">
@@ -43,7 +43,7 @@ class MyGridLayout extends Component {
                     </div>
 
                     <div className="widget" key={WIDGET_KEYS.PIECHART}>
-                        <ChordDiagram data={chordDiagramData} conf={chordDiagramConf}/>
+                        <ChordDiagram data={chordDiagramData.data} conf={chordDiagramData.conf}/>
                     </div>
                 </ResponsiveGridLayout>
             </div>

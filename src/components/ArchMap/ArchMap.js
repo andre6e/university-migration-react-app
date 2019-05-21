@@ -113,17 +113,19 @@ class ArchMap extends Component {
                     )}
                 </DeckGL>
                 
-                { showLegend && (
+                { showLegend && conf.visibleRegions && (
                     <div className="layersSelectorContainer">
                         <MapLegend conf={conf.visibleRegions}/>
                     </div>
                 )}
 
-                <div className="legendButton" onClick={this._handleShowLegend.bind(this)}>
-                    <IconButton aria-label="Legend">
-                        <AssignmentIcon/>
-                    </IconButton>
-                </div>
+                { conf.visibleRegions && (
+                    <div className="legendButton" onClick={this._handleShowLegend.bind(this)}>
+                        <IconButton aria-label="Legend">
+                            <AssignmentIcon/>
+                        </IconButton>
+                    </div>
+                )}
 
                 { this._renderTooltip() }
             </div>

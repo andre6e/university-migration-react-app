@@ -37,3 +37,17 @@ export const GRID_LAYOUT_CONFIG = {
     },
     MARGIN: MARGIN
 };
+
+// API
+export const API_URL = 'http://localhost:3001';
+export const REQUEST_ENDPOINT = '/getData';
+
+// Chord diagram
+export const CHORD_DEFAULT_EMPTY_CHART_DATA = [
+    { "from": "Nessun risultato", "to": "Nessun risultato", "value": 1, "nodeColor": "#858787" }, // il nodeColor verrà attribuito al nodo from
+];
+
+// Stacked column
+export const STACKED_DEFAULT_EMPTY_CHART_DATA = [
+    { "regionFromCategory": "", "nores": 1}
+]; 

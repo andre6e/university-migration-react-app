@@ -4,6 +4,8 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
+import { STACKED_DEFAULT_EMPTY_CHART_DATA } from '../../constants/constants';
+
 import './StackedColumnChart.css';
 
 am4core.useTheme(am4themes_animated);
@@ -13,6 +15,15 @@ class StackedColumnChart extends Component {
     // }
 
     /* LOGIC HELPERS FUNCTION */
+
+    _enableChart() {
+        // this.chart.legend.disabled = false;
+    }
+
+    _disableChart() {
+        // this.chart.legend.disabled = true;
+        this.chart.data = STACKED_DEFAULT_EMPTY_CHART_DATA;
+    }
 
     // Create series
     _initializeChart() {
@@ -44,6 +55,13 @@ class StackedColumnChart extends Component {
 
         // Saving chart reference
         this.chart = chart;
+
+        // Enabling/disabling custom empty chart style if no data have been received
+        if (!data.length) {
+            this._disableChart()
+          } else {
+            this._enableChart();
+          }
     }
 
     _createSeries(field, name, seriesColour, regionFromCategoryKey, chart) {
@@ -72,6 +90,7 @@ class StackedColumnChart extends Component {
 
     // Remove series if needed (in order to update the chart legend)
     _onChartDataValidated() {
+        debugger;
         if (this.seriesToRemoveKeys.length) {
            while (this.seriesToRemoveKeys.length > 0) {
                 let keyToRemove = this.seriesToRemoveKeys.pop();
@@ -101,6 +120,7 @@ class StackedColumnChart extends Component {
         const newSeries = Object.keys(conf.series);
 
         if (oldSeries.sort().join() !== newSeries.sort().join()) {
+            debugger;
             // Checks series to remove
             let chartSeriesLength = this.chart.series.length;
             for (let i = 0; i < chartSeriesLength ; i++) {
@@ -147,7 +167,14 @@ class StackedColumnChart extends Component {
         
         // Chart data update 
         // TODO: check if it is necessary
-        this.chart.data = data;
+        // this.chart.data = data;
+
+        if (data.length) {
+            this.chart.data = data;
+            this._enableChart();
+        } else {
+            this._disableChart();
+        }
     }
 
     render() {

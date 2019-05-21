@@ -84,6 +84,12 @@ export const regionsListMock = [
 ];
 
 /* ARCH MAP */
+
+export const emptyArchLayersData = {
+    data: [],
+    conf: {}
+}
+
 export const archLayersData = {
     data: [
         {
@@ -345,6 +351,19 @@ export const stackedColumnData = {
     }
 };
 
+export const stackedColumnEmptyData = {
+    data: [],
+    conf: {
+        series: {
+            "nores": "Nessun risultato"
+        },
+        seriesColours: {
+            "nores": "#858787"
+        },
+        REGION_FROM_CATEGORY_KEY: "regionFromCategory"
+    }
+};
+
 export const stackedColumnData2 = {
     data: [
         { "regionFromCategory": "Basilicata", "europe": 2.5, /*"namerica": 2.5,  "asia": 2.1, */ "lamerica": 0.3, "meast": 0.2,  "africa": 0.1 }, 
@@ -372,22 +391,33 @@ export const stackedColumnData2 = {
 
 /* CHORD DIAGRAM */
 
-export const chordMockData = [
-    { "from": "A", "to": "D", "value": 10, "nodeColor": "#93B5C6" },
-    { "from": "B", "to": "D", "value": 8, "nodeColor": "#DDEDAA" },
-    { "from": "B", "to": "E", "value": 4, "nodeColor": "#DDEDAA" },
-    { "from": "B", "to": "C", "value": 2, "nodeColor": "#DDEDAA" },
-    { "from": "C", "to": "E", "value": 14, "nodeColor": "#F0CF65" },
-    { "from": "E", "to": "D", "value": 8, "nodeColor": "#D7816A" },
-    { "from": "C", "to": "A", "value": 4, "nodeColor": "#F0CF65" },
-    { "from": "G", "to": "A", "value": 7, "nodeColor": "#BEC5AD" },
-    { "from": "D", "to": "B", "value": 1, "nodeColor": "#BD4F6C" }, // il nodeColor verrà attribuito al nodo from
-    { "from": "J", "nodeColor": "#06D6A0" } // elemento con nessun valore
-];
+export const chordEmptyData = {
+    data: [],
+    conf: {
+        fromName : "from",
+        toName : "to",
+        value : "value",
+        color: "nodeColor"
+    }
+};
 
-export const chordConf = {
-    fromName : "from",
-    toName : "to",
-    value : "value",
-    color: "nodeColor"
+export const chordMockData = {
+    data: [
+        { "from": "A", "to": "D", "value": 10, "nodeColor": "#93B5C6" },
+        { "from": "B", "to": "D", "value": 8, "nodeColor": "#DDEDAA" },
+        { "from": "B", "to": "E", "value": 4, "nodeColor": "#DDEDAA" },
+        { "from": "B", "to": "C", "value": 2, "nodeColor": "#DDEDAA" },
+        { "from": "C", "to": "E", "value": 14, "nodeColor": "#F0CF65" },
+        { "from": "E", "to": "D", "value": 8, "nodeColor": "#D7816A" },
+        { "from": "C", "to": "A", "value": 4, "nodeColor": "#F0CF65" },
+        { "from": "G", "to": "A", "value": 7, "nodeColor": "#BEC5AD" },
+        { "from": "D", "to": "B", "value": 1, "nodeColor": "#BD4F6C" }, // il nodeColor verrà attribuito al nodo from
+        { "from": "J", "nodeColor": "#06D6A0" } // elemento con nessun valore
+    ],
+    conf: {
+        fromName : "from",
+        toName : "to",
+        value : "value",
+        color: "nodeColor"
+    }
 };
