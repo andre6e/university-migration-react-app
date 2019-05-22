@@ -421,3 +421,78 @@ export const chordMockData = {
         color: "nodeColor"
     }
 };
+
+/* BULLETS PIE CHART */
+
+export const bulletsPieChartData = {
+    data: [{
+        "fromRegionName": "Lithuania",
+        "units": 500,
+        "columnColor": "#FFFF00",
+        "pie": [{
+          "value": 250,
+          "title": "Cat #1",
+          "pieColor": "#845EC2"
+        }, {
+          "value": 150,
+          "title": "Cat #2",
+          "pieColor": "#D65DB1"
+        }, {
+          "value": 100,
+          "title": "Cat #3",
+          "pieColor": "#FF6F91"
+        }]
+      }, {
+        "fromRegionName": "Czech Republic",
+        "units": 300,
+        "columnColor": "#008000",
+        "pie": [{
+          "value": 80,
+          "title": "Cat #1",
+          "pieColor": "#FF9671"
+        }, {
+          "value": 130,
+          "title": "Cat #2",
+          "pieColor": "#FFC75F"
+        }, {
+          "value": 90,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+      }, {
+        "fromRegionName": "Ireland",
+        "units": 200,
+        "columnColor": "#DD3914",
+        "pie": [{
+          "value": 75,
+          "title": "Cat #1",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 55,
+          "title": "Cat #2",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 70,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+    }],
+    conf: {
+        COLUMN_COLOR: "columnColor",
+        PIE_COLOR: "pieColor",
+        COLUMN_REGION_NAME: "fromRegionName",
+        PIE_VALUE: "value",
+        PIE_TITLE: "title"
+    }
+};
+
+export const bulletsPieChartEmptyData = {
+    data: [],
+    conf: {
+        COLUMN_COLOR: "columnColor",
+        PIE_COLOR: "pieColor",
+        COLUMN_REGION_NAME: "fromRegionName",
+        PIE_VALUE: "value",
+        PIE_TITLE: "title",
+    }
+};

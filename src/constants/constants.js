@@ -51,3 +51,12 @@ export const CHORD_DEFAULT_EMPTY_CHART_DATA = [
 export const STACKED_DEFAULT_EMPTY_CHART_DATA = [
     { "regionFromCategory": "", "nores": 1}
 ]; 
+
+export const BULLETS_PIE_EMPTY_CHART_DATA = [
+    {
+        "fromRegionName": "Nessun risultato",
+        "units": 1,
+        "columnColor": "#858787",
+        "pie": []
+      }
+]

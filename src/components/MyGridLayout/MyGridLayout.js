@@ -3,7 +3,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 
 import ArchMap from '../ArchMap/ArchMap';
 import ChordDiagram from '../ChordDiagram/ChordDiagram';
-import StackedColumnChart from '../StackedColumnChart/StackedColumnChart';
+import BulletsPieChart from '../BulletsPieChart/BulletsPieChart';
 
 import { GRID_LAYOUT_CONFIG } from '../../constants/constants';
 import './MyGridLayout.css';
@@ -22,7 +22,7 @@ class MyGridLayout extends Component {
     // }
 
     render() {
-        const { archLayersData, stackedColumnData, chordDiagramData } = this.props;
+        const { archLayersData, bulletsPieChartData,  chordDiagramData } = this.props;
         
         return (
             <div className="gridLayoutContainer">
@@ -38,7 +38,7 @@ class MyGridLayout extends Component {
                     </div>
 
                     <div className="widget" key={WIDGET_KEYS.BARCHART}>
-                        <StackedColumnChart data={stackedColumnData.data} conf={stackedColumnData.conf}/>
+                        <BulletsPieChart data={bulletsPieChartData.data} conf={bulletsPieChartData.conf}/>
                     </div>
 
                     <div className="widget" key={WIDGET_KEYS.PIECHART}>
