@@ -295,7 +295,135 @@ export const bulletsPieChartData = {
           "title": "Cat #3",
           "pieColor": "#F9F871"
         }]
-    }],
+    },
+    {
+        "fromRegionName": "Another6",
+        "units": 200,
+        "columnColor": "#DD3914",
+        "pie": [{
+          "value": 75,
+          "title": "Cat #1",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 55,
+          "title": "Cat #2",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 70,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+    },
+    {
+        "fromRegionName": "Another7",
+        "units": 200,
+        "columnColor": "#DD3914",
+        "pie": [{
+          "value": 75,
+          "title": "Cat #1",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 55,
+          "title": "Cat #2",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 70,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+    },
+    {
+        "fromRegionName": "Another8",
+        "units": 200,
+        "columnColor": "#DD3914",
+        "pie": [{
+          "value": 75,
+          "title": "Cat #1",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 55,
+          "title": "Cat #2",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 70,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+    },
+    {
+        "fromRegionName": "Another9",
+        "units": 200,
+        "columnColor": "#DD3914",
+        "pie": [{
+          "value": 75,
+          "title": "Cat #1",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 55,
+          "title": "Cat #2",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 70,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+    },
+    {
+        "fromRegionName": "Another10",
+        "units": 200,
+        "columnColor": "#DD3914",
+        "pie": [{
+          "value": 75,
+          "title": "Cat #1",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 55,
+          "title": "Cat #2",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 70,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+    },
+    {
+        "fromRegionName": "Another11",
+        "units": 200,
+        "columnColor": "#DD3914",
+        "pie": [{
+          "value": 75,
+          "title": "Cat #1",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 55,
+          "title": "Cat #2",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 70,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+    },
+    {
+        "fromRegionName": "Another12",
+        "units": 200,
+        "columnColor": "#DD3914",
+        "pie": [{
+          "value": 75,
+          "title": "Cat #1",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 55,
+          "title": "Cat #2",
+          "pieColor": "#F9F871"
+        }, {
+          "value": 70,
+          "title": "Cat #3",
+          "pieColor": "#F9F871"
+        }]
+    },
+  
+  ],
     conf: {
         COLUMN_COLOR: "columnColor",
         PIE_COLOR: "pieColor",
