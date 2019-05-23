@@ -14,20 +14,6 @@ class BulletsPieChart extends Component {
     // constructor(props) {
     // }
 
-    // Abilito lo slice dei nodi e il tooltip
-    _enableChart() {
-        this.chart.series.getIndex(0).columns.template.fillOpacity = 1;
-        // add tooltip on column, not template, so that slices could also have tooltip
-        this.chart.series.getIndex(0).columns.template.column.tooltipText = "Series: {name}\nCategory: {categoryX}\nValue: {valueY}";
-    }
-
-    // Inserisco un solo nodo e disabilito il tooltip e lo slice del nodo
-    _disableChart() {
-        this.chart.data = BULLETS_PIE_EMPTY_CHART_DATA;
-        this.chart.series.getIndex(0).columns.template.fillOpacity = 0.3;
-        this.chart.series.getIndex(0).columns.template.column.tooltipText = "";
-    }
-
     _initializeChart() {
         const {data, conf} = this.props;
 
@@ -41,9 +27,12 @@ class BulletsPieChart extends Component {
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
         categoryAxis.dataFields.category = conf.COLUMN_REGION_NAME;
         categoryAxis.renderer.grid.template.disabled = true;
+        categoryAxis.renderer.labels.template.hidden = true;
+
+        // Salvo il riferimento
+        this.categoryAxisRef = categoryAxis;
 
         let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        // valueAxis.title.text = "Studendi iscritti/immatricolati";
         valueAxis.min = 0;
         valueAxis.renderer.baseGrid.disabled = true;
         valueAxis.renderer.grid.template.strokeOpacity = 0.07;
@@ -54,8 +43,17 @@ class BulletsPieChart extends Component {
         series.dataFields.categoryX = conf.COLUMN_REGION_NAME;
         series.tooltip.pointerOrientation = "vertical";
 
+        // Aggiungo bullet label cosi da poterla riposizionare
+        let bullet = series.bullets.push(new am4charts.LabelBullet());
+        bullet.label.text = "{categoryX}";
+        bullet.label.rotation = -90;
+        bullet.label.truncate = false;
+        bullet.label.hideOversized = false;
+
+        // Salvo il riferimento
+        this.bulletRef = bullet;
+
         let columnTemplate = series.columns.template;
-        // columnTemplate.column.tooltipText = "Series: {name}\nCategory: {categoryX}\nValue: {valueY}";
         columnTemplate.column.tooltipY = 0;
         columnTemplate.column.cornerRadiusTopLeft = 20;
         columnTemplate.column.cornerRadiusTopRight = 20;
@@ -65,13 +63,13 @@ class BulletsPieChart extends Component {
         columnTemplate.propertyFields.fill = conf.COLUMN_COLOR;
         columnTemplate.propertyFields.stroke = conf.COLUMN_COLOR;
 
-        // create pie chart as a column child
+        // Create pie chart as a column child
         let pieChart = series.columns.template.createChild(am4charts.PieChart);
-        pieChart.width = am4core.percent(100);
-        pieChart.height = am4core.percent(100);
+        pieChart.width = am4core.percent(80);
+        pieChart.height = am4core.percent(80);
         pieChart.align = "center";
         pieChart.valign = "middle";
-        pieChart.dataFields.data = "pie";
+        pieChart.dataFields.data = conf.PIE_FIELD_NAME;
 
         let pieSeries = pieChart.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = conf.PIE_VALUE;
@@ -81,6 +79,9 @@ class BulletsPieChart extends Component {
         pieSeries.slices.template.stroke = am4core.color("#ffffff");
         pieSeries.slices.template.strokeWidth = 1;
         pieSeries.slices.template.strokeOpacity = 0;
+
+        // Salvo il riferimento
+        this.pieSeriesRef = pieSeries;
 
         // Setto la proprietà che definisce il colore delle singole slice 
         pieSeries.slices.template.propertyFields.fill = conf.PIE_COLOR;
@@ -93,13 +94,56 @@ class BulletsPieChart extends Component {
         pieSeries.hiddenState.properties.startAngle = -90;
         pieSeries.hiddenState.properties.endAngle = 270;
 
+        // Salvo il riferimento
         this.chart = chart;
 
         // Enabling/disabling custom empty chart style if no data have been received
-        if (!data.length) {
-            this._disableChart()
-        } else {
+        this._handleEnalbeDisagleChart(data);
+    }
+
+    // Enabling/disabling custom empty chart style if no data have been received
+    _handleEnalbeDisagleChart(newData) {
+        if (newData.length) {
             this._enableChart();
+        } else {
+            this._disableChart();
+        }
+    }
+
+    // Abilito lo slice dei nodi e il tooltip
+    _enableChart() {
+        this.chart.series.getIndex(0).columns.template.fillOpacity = 1;
+        // add tooltip on column, not template, so that slices could also have tooltip
+        this.chart.series.getIndex(0).columns.template.column.tooltipText = "Series: {name}\nCategory: {categoryX}\nValue: {valueY}";
+
+        // Mostro la label al di sotto del chart
+        this.categoryAxisRef.renderer.labels.template.hidden = true;
+        this.bulletRef.label.hidden = false;
+    }
+
+    // Inserisco un solo nodo e disabilito il tooltip e lo slice del nodo
+    _disableChart() {
+        this.chart.data = BULLETS_PIE_EMPTY_CHART_DATA;
+        this.chart.series.getIndex(0).columns.template.fillOpacity = 0.3;
+        this.chart.series.getIndex(0).columns.template.column.tooltipText = "";
+
+        // Mostro le label al di sopra delle colonne
+        this.categoryAxisRef.renderer.labels.template.hidden = false;
+        this.bulletRef.label.hidden = true;
+    }
+
+    // Hides the pie charts on the columns if the layout is small or has been resized to small
+    _handleSmallLayoutView() {
+        const { isLayoutSmall, hasBeenResizedToSmall } = this.props;
+
+        // Hides/Shows the pieSeries from the columns
+        if (this.pieSeriesRef && (isLayoutSmall !== this.pieSeriesRef.slices.template.disabled)) {
+            this.pieSeriesRef.slices.template.disabled = isLayoutSmall;
+        }
+
+        // Hides/Shows the pieSeries from the columns
+        if (this.pieSeriesRef && hasBeenResizedToSmall && !this.pieSeriesRef.slices.template.disabled) {
+            this.pieSeriesRef.slices.template.disabled = hasBeenResizedToSmall;
         }
     }
 
@@ -117,22 +161,19 @@ class BulletsPieChart extends Component {
 
     componentDidUpdate(oldProps) {
         //TODO: check se redraw è necessario??
-        
-        // if (oldProps.paddingRight !== this.props.paddingRight) {
-        //   this.chart.paddingRight = this.props.paddingRight;
-        // }
+        this.chart.data = this.props.data;
 
-        if (this.props.data.length) {
-          this.chart.data = this.props.data;
-          this._enableChart();
-        } else {
-          this._disableChart();
-        }
+        // Enabling/disabling custom empty chart style if no data have been received
+        this._handleEnalbeDisagleChart(this.props.data);
     }
 
     render() {
-      return (
-        <div id="bulletschartdiv" className="bulletsPieContainer"></div>
+        this._handleSmallLayoutView();
+        
+        return (
+          <div className="bulletChartComponentContainer">
+              <div id="bulletschartdiv" className="bulletsPieContainer"></div>
+        </div>
       )
     }
 }

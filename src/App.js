@@ -9,7 +9,10 @@ import '../node_modules/react-grid-layout/css/styles.css';
 import '../node_modules/react-resizable/css/styles.css';
 
 // Mock
-import { emptyArchLayersData, regionsListMock, chordEmptyData, bulletsPieChartEmptyData } from './mock/mock';
+import { archLayersData, chordMockData, bulletsPieChartData } from './mock/mock';
+
+// Constants
+import { emptyArchLayersData, chordEmptyData, bulletsPieChartEmptyData, regionsListMock } from './constants/constants';
 
 import * as ApiService from './utils/ApiService';
 
@@ -20,13 +23,17 @@ const initialState = {
   TO_SELECTED_LIST: [],
 
   SLIDER_VALUE: {
-    min: 2014,
-    max: 2018,
+    min: 2015,
+    max: 2017,
   },
 
   ARCH_LAYERS_DATA: emptyArchLayersData,
   BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
   CHORD_MOCK_DATA: chordEmptyData,
+
+  // ARCH_LAYERS_DATA: archLayersData,
+  // BULLETS_PIE_CHART_DATA: bulletsPieChartData,
+  // CHORD_MOCK_DATA: chordMockData,
 };
 
 class App extends Component {
@@ -68,9 +75,9 @@ class App extends Component {
         />
 
         <MyGridLayout 
-          // Arch map
+          // Arch Map
           archLayersData = {this.state.ARCH_LAYERS_DATA}
-          // Bullets pie Chartss
+          // Bullets Pie
           bulletsPieChartData = {this.state.BULLETS_PIE_CHART_DATA}
           // Chord Diagram
           chordDiagramData = {this.state.CHORD_MOCK_DATA}
@@ -81,11 +88,15 @@ class App extends Component {
 
   _executeQuery() {
     // console.log(this.state);
-    // this.setState({
-    //   ARCH_LAYERS_DATA: archLayersData,
-    //   BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
-    //   // CHORD_MOCK_DATA: chordMockData
-    // })
+
+    this.setState({
+      ARCH_LAYERS_DATA: archLayersData,
+      BULLETS_PIE_CHART_DATA: bulletsPieChartData,
+      CHORD_MOCK_DATA: chordMockData,
+      // ARCH_LAYERS_DATA: emptyArchLayersData,
+      // BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
+      // CHORD_MOCK_DATA: chordEmptyData,
+    })
   };
 
   /* SELECT */
