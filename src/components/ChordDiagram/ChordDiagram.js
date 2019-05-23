@@ -14,6 +14,15 @@ class ChordDiagram extends Component {
     // constructor(props) {
     // }
 
+    // Enabling/disabling custom empty chart style if no data have been received
+    _handleEnalbeDisagleChart(newData) {
+      if (newData.length) {
+          this._enableChart();
+      } else {
+          this._disableChart();
+      }
+  }
+
     // Abilito lo slice dei nodi e il tooltip
     _enableChart() {
       this.chart.nodes.template.draggable = true;
@@ -44,11 +53,7 @@ class ChordDiagram extends Component {
       this.chart = chart;
 
       // Enabling/disabling custom empty chart style if no data have been received
-      if (!data.length) {
-        this._disableChart()
-      } else {
-        this._enableChart();
-      }
+      this._handleEnalbeDisagleChart(data);
     }
 
     componentWillMount() {
@@ -59,17 +64,10 @@ class ChordDiagram extends Component {
 
     componentDidUpdate(oldProps) {
         //TODO: check se redraw è necessario??
-        
-        // if (oldProps.paddingRight !== this.props.paddingRight) {
-        //   this.chart.paddingRight = this.props.paddingRight;
-        // }
+       this.chart.data = this.props.data;
 
-        if (this.props.data.length) {
-          this.chart.data = this.props.data;
-          this._enableChart();
-        } else {
-          this._disableChart();
-        }
+        // Enabling/disabling custom empty chart style if no data have been received
+        this._handleEnalbeDisagleChart(this.props.data);
     }
 
     render() {
