@@ -104,9 +104,10 @@ export const bulletsPieChartEmptyData = {
 
 export const emptyArchLayersData = {
     data: [],
-    conf: {}
+    conf: {
+      visibleRegions: []
+    }
 }
-
 
 /* REGIONS LIST */
 
@@ -192,3 +193,8 @@ export const regionsListMock = [
       "label": "Veneto"
     }
 ];
+
+// Set your mapbox token here
+export const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
+export const ARCHS_ANIMATION_INCREMENT = 0.005;
+export const ARCHS_ANIMATION_INTERVAL = 10;

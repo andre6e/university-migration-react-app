@@ -1,7 +1,7 @@
 /* global fetch */
 import React, {Component} from 'react';
 import { StaticMap } from 'react-map-gl';
-import DeckGL, {ArcLayer} from 'deck.gl';
+import DeckGL from 'deck.gl';
 import MapLegend from '../MapLegend/MapLegend';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -10,8 +10,9 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './ArchMap.css';
 
-// Set your mapbox token here
-const MAPBOX_TOKEN = 'pk.eyJ1IjoidWJlcmRhdGEiLCJhIjoiY2pudzRtaWloMDAzcTN2bzN1aXdxZHB5bSJ9.2bkj3IiRC8wj3jLThvDGdA';
+import ArcBrushingLayer from './ArcBrushingLayer';
+
+import { MAPBOX_TOKEN, ARCHS_ANIMATION_INCREMENT, ARCHS_ANIMATION_INTERVAL } from '../../constants/constants';
 
 const INITIAL_VIEW_STATE = {
   longitude: 13.319677,
@@ -27,8 +28,12 @@ class ArchMap extends Component {
 
         this.state = {
             hoveredObject: undefined,
-            showLegend: true
+            showLegend: false,
+            coef: 0.001
         }
+
+        // Necessarie per la logica dell'animazione degli archi
+        this._resetAnimationStatus();
     }
 
     /* LOGIC HELPERS FUNCTIONS */
@@ -41,12 +46,13 @@ class ArchMap extends Component {
         resLayersContainer = data.map(layerData => {
             return this._createArchLayerObject(layerData);
         });
-
+        
         return resLayersContainer;
     }
 
     _createArchLayerObject(layerData) {
-        return new ArcLayer({
+        // return new ArcLayer({
+        return new ArcBrushingLayer({
             id: layerData.id,
             data: layerData.data,
             getSourceColor: layerData.getSourceColor,
@@ -60,8 +66,33 @@ class ArchMap extends Component {
             // necessari all'onhover
             pickable: true,
             autoHighlight: true,
-            onHover: this._handleArchHover.bind(this)
+            onHover: this._handleArchHover.bind(this),
+
+            // necessario per l'animazione
+            coef: this.state.coef
         });
+    }
+
+    _animateArcs() {
+        const animationInterval = setInterval(() => {
+            let callback;
+
+            this._ARCHS_ANIMATION_COEF += ARCHS_ANIMATION_INCREMENT;
+            
+            if (this._ARCHS_ANIMATION_COEF >= 1.0) {
+                clearInterval(animationInterval);
+                callback = this._resetAnimationStatus.bind(this);
+            } 
+
+            this.setState({
+                coef: this._ARCHS_ANIMATION_COEF
+            }, callback ? callback : () => {});
+        }, ARCHS_ANIMATION_INTERVAL);
+    }
+
+    _resetAnimationStatus() {
+        this._ARCHS_ANIMATION_NEEDED = true;
+        this._ARCHS_ANIMATION_COEF = 0.001;
     }
 
     _handleArchHover(object) {
@@ -92,16 +123,80 @@ class ArchMap extends Component {
             showLegend: !this.state.showLegend
         });
     }
+    
+    _areNewPropsDifferentFromOldProps(oldProps) {
+        const { data, conf } = this.props;
+
+        // CHECK CONF
+        if (conf.visibleRegions.length !== oldProps.conf.visibleRegions.length) {
+            return true;
+        } else {
+            let confKeys = conf.visibleRegions.map(el => el.name).sort().join();
+            let oldConfKeys = oldProps.conf.visibleRegions.map(el => el.name).sort().join();
+    
+            if (confKeys !== oldConfKeys) {
+                return true;
+            }
+        }
+
+        // CHECK DATA
+        if (data.length !== oldProps.data.length) {
+            return true;
+        } else {
+            // TODO va spostato sul server
+            let newDataSorted = data.sort(this._compareFunction).map(el => JSON.stringify(el.data[0])).join();
+            let oldDataSorted = oldProps.data.sort(this._compareFunction).map(el => JSON.stringify(el.data[0])).join();
+
+            if (newDataSorted !== oldDataSorted) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    _compareFunction(a,b) {
+        let toRet = a;
+
+        if (b.id < a.id) {
+            toRet = b;
+        }
+
+        return toRet;
+    }
+
+    _isArchAnimationNecessary() {
+        return this.props.data.length && this._ARCHS_ANIMATION_NEEDED;
+    }
+
+    _handleArchsStartAnimation() {
+        this._ARCHS_ANIMATION_NEEDED = false;
+        this._animateArcs();
+    }
 
     /* COMPONENT LIFECYCLE HOOKS */
+
+    componentDidMount() {
+        if (this._isArchAnimationNecessary()) {
+            this._handleArchsStartAnimation();
+        }
+    }
+
+    componentDidUpdate(oldProps) {
+        const { data, conf } = this.props;
+        
+        if (data.length && conf.visibleRegions.length && this._areNewPropsDifferentFromOldProps(oldProps) && this._isArchAnimationNecessary()) {
+            this._handleArchsStartAnimation();
+        }
+    }
 
     render() {
         const { viewState, controller = true, baseMap = true, conf } = this.props;
         const { showLegend } = this.state;
-        
+
         return (
             <div className="testContainerMap">
-                <DeckGL layers={this._renderLayers()} initialViewState={INITIAL_VIEW_STATE} viewState={viewState} controller={controller}>
+                <DeckGL layers={this._renderLayers()} initialViewState={INITIAL_VIEW_STATE} viewState={viewState} controller={controller} >
                     {baseMap && (
                         <StaticMap
                             reuseMaps
@@ -113,13 +208,13 @@ class ArchMap extends Component {
                     )}
                 </DeckGL>
                 
-                { showLegend && conf.visibleRegions && (
+                { showLegend && conf.visibleRegions && conf.visibleRegions.length && (
                     <div className="layersSelectorContainer">
                         <MapLegend conf={conf.visibleRegions}/>
                     </div>
                 )}
 
-                { conf.visibleRegions && (
+                { conf.visibleRegions && conf.visibleRegions.length && (
                     <div className="legendButton" onClick={this._handleShowLegend.bind(this)}>
                         <IconButton aria-label="Legend">
                             <AssignmentIcon/>

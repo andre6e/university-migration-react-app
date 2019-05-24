@@ -14,7 +14,7 @@ import { archLayersData, chordMockData, bulletsPieChartData } from './mock/mock'
 // Constants
 import { emptyArchLayersData, chordEmptyData, bulletsPieChartEmptyData, regionsListMock } from './constants/constants';
 
-import * as ApiService from './utils/ApiService';
+// import * as ApiService from './utils/ApiService';
 
 const initialState = {
   REGION_OPTIONS: regionsListMock,
@@ -93,6 +93,7 @@ class App extends Component {
       ARCH_LAYERS_DATA: archLayersData,
       BULLETS_PIE_CHART_DATA: bulletsPieChartData,
       CHORD_MOCK_DATA: chordMockData,
+
       // ARCH_LAYERS_DATA: emptyArchLayersData,
       // BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
       // CHORD_MOCK_DATA: chordEmptyData,
