@@ -15,6 +15,7 @@ import { archLayersData, chordMockData, bulletsPieChartData } from './mock/mock'
 import { emptyArchLayersData, chordEmptyData, bulletsPieChartEmptyData, regionsListMock , RANGE_SLIDER_DEF_VALUE} from './constants/constants';
 
 // import * as ApiService from './utils/ApiService';
+import * as Utils from './utils/Utils';
 
 const initialState = {
   REGION_OPTIONS: regionsListMock,
@@ -59,16 +60,34 @@ class App extends Component {
     });
   }
 
-  _executeQuery() {
+  _handleSearchButtonClick() {
+    let currentQuery = {
+      FROM: this.state.FROM_SELECTED_LIST.sort(),
+      TO: this.state.TO_SELECTED_LIST.sort(),
+      TIME_RANGE: this.state.SLIDER_VALUE
+    };
+    
+    if (!Utils.isLastQueryEqualToCurrentOne(this.state.LAST_QUERY, currentQuery)) {
+      this._executeQuery(currentQuery)
+    }
+  };
+  
+  _executeQuery(query) {
     // faccio la query e poi setto lo stato con i dati risultanti
+    console.log("executing query");
 
-    // LA QUERY DA FAR PARTIRE SOLO SE è DIFFERENTE DALL'ULTIMA
+    // ApiService.postRequest(query).then(res => {
+    //   console.log(res);
+    // }).catch(err => {
+    //   console.error(err);
+    // })
 
     this.setState({
       ARCH_LAYERS_DATA: archLayersData,
       BULLETS_PIE_CHART_DATA: bulletsPieChartData,
       CHORD_MOCK_DATA: chordMockData,
-
+      LAST_QUERY: query
+  
       // ARCH_LAYERS_DATA: emptyArchLayersData,
       // BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
       // CHORD_MOCK_DATA: chordEmptyData,
@@ -78,17 +97,15 @@ class App extends Component {
   /* COMPONENT LIFECYCLE HOOKS */
 
   componentDidMount() {
-    // let query = {
-    //   FROM: this.state.FROM_SELECTED_LIST,
-    //   TO: this.state.TO_SELECTED_LIST,
-    //   TIME_RANGE: this.state.SLIDER_VALUE
-    // };
+    let query = {
+      FROM: this.state.FROM_SELECTED_LIST,
+      TO: this.state.TO_SELECTED_LIST,
+      TIME_RANGE: this.state.SLIDER_VALUE
+    };
 
-    // ApiService.postRequest(query).then(res => {
-    //   console.log(res);
-    // }).catch(err => {
-    //   console.error(err);
-    // })
+    this.setState({
+      LAST_QUERY: query
+    });
   }
 
   render() {
@@ -109,7 +126,7 @@ class App extends Component {
           onSliderValueChange = {this.handleSliderValueChange.bind(this)}
 
           // Search button click
-          onSearchButtonClick = {this._executeQuery.bind(this)}
+          onSearchButtonClick = {this._handleSearchButtonClick.bind(this)}
         />
 
         <MyGridLayout 
