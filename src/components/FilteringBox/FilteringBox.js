@@ -15,13 +15,8 @@ class FilteringBox extends Component {
 
     handleSelectChange(options, select) {
         const { onSelectFromOptionsSelection, onSelectToOptionsSelection } = this.props;
-        const name = select.name;
 
-        if (name === SELECT_NAMES.FROM) {
-            onSelectFromOptionsSelection(options);
-        } else {
-            onSelectToOptionsSelection(options);
-        }
+        (select.name === SELECT_NAMES.FROM) ? onSelectFromOptionsSelection(options) : onSelectToOptionsSelection(options);
     };
 
     render() {
