@@ -12,7 +12,7 @@ import '../node_modules/react-resizable/css/styles.css';
 import { archLayersData, chordMockData, bulletsPieChartData } from './mock/mock';
 
 // Constants
-import { emptyArchLayersData, chordEmptyData, bulletsPieChartEmptyData, regionsListMock } from './constants/constants';
+import { emptyArchLayersData, chordEmptyData, bulletsPieChartEmptyData, regionsListMock , RANGE_SLIDER_DEF_VALUE} from './constants/constants';
 
 // import * as ApiService from './utils/ApiService';
 
@@ -22,10 +22,7 @@ const initialState = {
   FROM_SELECTED_LIST: [],
   TO_SELECTED_LIST: [],
 
-  SLIDER_VALUE: {
-    min: 2015,
-    max: 2017,
-  },
+  SLIDER_VALUE: RANGE_SLIDER_DEF_VALUE,
 
   ARCH_LAYERS_DATA: emptyArchLayersData,
   BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
@@ -42,8 +39,48 @@ class App extends Component {
       this.state = initialState;
   };
 
+  /* SELECT */
+  handleSelectFromOptions (value) {
+    this.setState({
+      FROM_SELECTED_LIST: value
+    }, () => { this._executeQuery() });
+  };
+
+  handleSelectToOptions (value) {
+    this.setState({
+      TO_SELECTED_LIST: value
+    }, () => { this._executeQuery() });
+  };
+
+  /* RANGE SLIDER */
+  handleSliderValueChange (value) {
+    this.setState({
+      SLIDER_VALUE: value
+    }, () => { this._executeQuery() });
+  }
+
+  _executeQuery(forceSearch) {
+    if (forceSearch === true) {
+      // faccio la query e poi setto lo stato con i dati risultanti
+
+      // LA QUERY DA FAR PARTIRE SOLO SE è DIFFERENTE DALL'ULTIMA
+
+      this.setState({
+        ARCH_LAYERS_DATA: archLayersData,
+        BULLETS_PIE_CHART_DATA: bulletsPieChartData,
+        CHORD_MOCK_DATA: chordMockData,
+  
+        // ARCH_LAYERS_DATA: emptyArchLayersData,
+        // BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
+        // CHORD_MOCK_DATA: chordEmptyData,
+      })
+    }
+  };
+
+  /* COMPONENT LIFECYCLE HOOKS */
+
   componentDidMount() {
-    // var query = {
+    // let query = {
     //   FROM: this.state.FROM_SELECTED_LIST,
     //   TO: this.state.TO_SELECTED_LIST,
     //   TIME_RANGE: this.state.SLIDER_VALUE
@@ -72,6 +109,9 @@ class App extends Component {
           // Slider
           sliderValue = {this.state.SLIDER_VALUE}
           onSliderValueChange = {this.handleSliderValueChange.bind(this)}
+
+          // Search button click -> Execute query
+          onSearchButtonClick = {this._executeQuery.bind(this, true)}
         />
 
         <MyGridLayout 
@@ -84,40 +124,6 @@ class App extends Component {
         />
       </div>
     );
-  }
-
-  _executeQuery() {
-    // console.log(this.state);
-
-    this.setState({
-      ARCH_LAYERS_DATA: archLayersData,
-      BULLETS_PIE_CHART_DATA: bulletsPieChartData,
-      CHORD_MOCK_DATA: chordMockData,
-
-      // ARCH_LAYERS_DATA: emptyArchLayersData,
-      // BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
-      // CHORD_MOCK_DATA: chordEmptyData,
-    })
-  };
-
-  /* SELECT */
-  handleSelectFromOptions (value) {
-    this.setState({
-      FROM_SELECTED_LIST: value
-    }, () => { this._executeQuery() });
-  };
-
-  handleSelectToOptions (value) {
-    this.setState({
-      TO_SELECTED_LIST: value
-    }, () => { this._executeQuery() });
-  };
-
-  /* RANGE SLIDER */
-  handleSliderValueChange (value) {
-    this.setState({
-      SLIDER_VALUE: value
-    }, () => { this._executeQuery() });
   }
 }
 

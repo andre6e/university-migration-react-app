@@ -35,3 +35,11 @@
 .input-range__track--active {
     background: darkgray !important;
 }
+
+.searchButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    padding-top: 1em;
+}

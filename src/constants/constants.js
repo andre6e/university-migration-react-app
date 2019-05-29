@@ -1,8 +1,13 @@
 /* SELECTS REGIONS */
-
 export const SELECT_NAMES = {
     FROM: 'FROM_SELECT',
     TO: 'TO_SELECT'
+};
+
+/* SLIDER DAFAULT STARTING VALUE */
+export const RANGE_SLIDER_DEF_VALUE = {
+  min: 2015,
+  max: 2017
 };
 
 /* RESPONSIVE GRIDs CONF */
