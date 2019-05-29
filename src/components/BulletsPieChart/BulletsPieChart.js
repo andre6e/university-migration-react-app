@@ -15,7 +15,7 @@ class BulletsPieChart extends Component {
     // }
 
     _initializeChart() {
-        const {data, conf} = this.props;
+        const { data, conf } = this.props;
 
         // Create chart instance
         let chart = am4core.create("bulletschartdiv", am4charts.XYChart);
@@ -133,17 +133,11 @@ class BulletsPieChart extends Component {
     }
 
     // Hides the pie charts on the columns if the layout is small or has been resized to small
-    _handleSmallLayoutView() {
-        const { isLayoutSmall, hasBeenResizedToSmall } = this.props;
+    _handlePiesChartVisibility() {
+        const { piesDisabled } = this.props;
 
-        // Hides/Shows the pieSeries from the columns
-        if (this.pieSeriesRef && (isLayoutSmall !== this.pieSeriesRef.slices.template.disabled)) {
-            this.pieSeriesRef.slices.template.disabled = isLayoutSmall;
-        }
-
-        // Hides/Shows the pieSeries from the columns
-        if (this.pieSeriesRef && hasBeenResizedToSmall && !this.pieSeriesRef.slices.template.disabled) {
-            this.pieSeriesRef.slices.template.disabled = hasBeenResizedToSmall;
+        if (this.pieSeriesRef && this.pieSeriesRef.slices.template.disabled !== piesDisabled) {
+            this.pieSeriesRef.slices.template.disabled = piesDisabled;
         }
     }
 
@@ -151,6 +145,7 @@ class BulletsPieChart extends Component {
     
     componentDidMount() {
         this._initializeChart();
+        this._handlePiesChartVisibility();
     }
 
     componentWillMount() {
@@ -168,10 +163,10 @@ class BulletsPieChart extends Component {
     }
 
     render() {
-        this._handleSmallLayoutView();
-        
+        this._handlePiesChartVisibility();
+
         return (
-          <div className="bulletChartComponentContainer">
+            <div className="bulletChartComponentContainer">
               <div id="bulletschartdiv" className="bulletsPieContainer"></div>
         </div>
       )

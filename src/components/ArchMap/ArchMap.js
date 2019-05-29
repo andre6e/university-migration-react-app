@@ -155,6 +155,7 @@ class ArchMap extends Component {
         return false;
     }
     
+    // TODO va spostato sul server
     _compareFunction(a,b) {
         let toRet = a;
 

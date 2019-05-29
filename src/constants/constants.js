@@ -22,14 +22,30 @@ const LAYOUTS = {
     ],
     MD: [
         {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 10, h: 3, static: true},
-        {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 10, h: 3, static: true},
-        {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 10, h: 3, static: true}
+        {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 10, h: 3, minW: 3},
+        {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 10, h: 3, minW: 3}
     ],
     SM: [
         {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 6, h: 3, static: true},
         {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 6, h: 3, static: true},
         {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 6, h: 3, static: true}
+    ],
+    XS: [
+      {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 4, h: 3, static: true},
+      {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 4, h: 3, static: true},
+      {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 4, h: 3, static: true}
+    ],
+    XXS: [
+      {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 2, h: 3, static: true},
+      {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 2, h: 3, static: true},
+      {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 2, h: 3, static: true}
     ]
+};
+
+// DEFAULT GRID LAYOUT AND LAYOUT BREAKPOINT KEY (only for elaboration purpose when the grid is loading)
+export const STARTING_GRID_LAYOUT_DEF_CONF = {
+  breakpoint: 'lg',
+  layout: LAYOUTS.LG
 };
 
 // Grid layout margin
@@ -46,14 +62,21 @@ export const LAYOUT_BREAKPOINTS_KEYS = {
 export const GRID_LAYOUT_CONFIG = {
     COLS: {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
     BREAKPOINTS: {lg: 1024, md: 768, sm: 425, xs: 375, xxs: 320},
+    MARGIN: MARGIN,
     LAYOUTS: {
         lg:  LAYOUTS.LG,
         md:  LAYOUTS.MD,
         sm:  LAYOUTS.SM,
-        xs:  LAYOUTS.SM,
-        xxs: LAYOUTS.SM
-    },
-    MARGIN: MARGIN
+        xs:  LAYOUTS.XS,
+        xxs: LAYOUTS.XXS
+    }
+
+    // ATTUALMENTE QUESTO SONO I BREAKPOINTS IN PIXEL
+    // lg > 1089,
+    // 832 > md < 1089 ,
+    // 489 > sm < 832,
+    // 439 > xs < 489,
+    // xxs < 439
 };
 
 /* API CONF */
@@ -99,6 +122,36 @@ export const bulletsPieChartEmptyData = {
         PIE_FIELD_NAME: "pie"
     }
 };
+
+// Bullets pie charts configuration (max n of columns that supports pie charts on it according to the layout and widget width)
+export const BULLETS_VISIBLE_LAYOUT_CONF = {
+  xxs: 3, // not resizable
+  xs: 4, // not resizable
+  sm: 9, // not resizable
+  // widget weight -> max columns (cause it's resizable)
+  md: {
+    3: 3,
+    4: 4,
+    5: 6,
+    6: 7,
+    7: 9,
+    8: 10,
+    9: 11,
+    10: 13
+  },
+  lg: {
+    3: 3,
+    4: 4,
+    5: 6,
+    6: 7,
+    7: 9,
+    8: 10,
+    9: 11,
+    10: 15,
+    11: 18,
+    12: 19
+  }
+}
 
 /* ARCH MAP */
 

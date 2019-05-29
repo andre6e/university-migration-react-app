@@ -5,7 +5,7 @@ import ArchMap from '../ArchMap/ArchMap';
 import ChordDiagram from '../ChordDiagram/ChordDiagram';
 import BulletsPieChart from '../BulletsPieChart/BulletsPieChart';
 
-import { GRID_LAYOUT_CONFIG, LAYOUT_BREAKPOINTS_KEYS, WIDGET_KEYS } from '../../constants/constants';
+import { GRID_LAYOUT_CONFIG, STARTING_GRID_LAYOUT_DEF_CONF, LAYOUT_BREAKPOINTS_KEYS, WIDGET_KEYS, BULLETS_VISIBLE_LAYOUT_CONF } from '../../constants/constants';
 import './MyGridLayout.css';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -13,29 +13,47 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 class MyGridLayout extends Component {
     constructor(props) {
         super(props);
+        
         this.state = {
-            isLayoutSmall: false,
-            layoutStateAfterResize: []
+            currentLayoutBreakpoint: STARTING_GRID_LAYOUT_DEF_CONF.breakpoint,
+            currentLayout: STARTING_GRID_LAYOUT_DEF_CONF.layout
         }
+    }
+
+    /* LOGIC HELPERS FUNCTIONS */
+
+    _getWidgetCurrentState (WIDGET_KEY) {
+        return this.state.currentLayout.length ? this.state.currentLayout.filter(el => el.i === WIDGET_KEY)[0] : null;
+    }
+
+    _getPieChartHiddenState() {
+        const widgetState = this._getWidgetCurrentState(WIDGET_KEYS.BULLETSPIE);
+
+        return widgetState && this.state.currentLayoutBreakpoint ? this._elabPiesHiddenState(widgetState) : false;
+    }
+
+    _elabPiesHiddenState(widgetState) {
+        const bulletsDataColumns = this.props.bulletsPieChartData.data.length, confKey = this.state.currentLayoutBreakpoint;
+        const maxCol = confKey === LAYOUT_BREAKPOINTS_KEYS.md || confKey === LAYOUT_BREAKPOINTS_KEYS.lg ? BULLETS_VISIBLE_LAYOUT_CONF[confKey][widgetState.w] : BULLETS_VISIBLE_LAYOUT_CONF[confKey];
+
+        return bulletsDataColumns >= maxCol ? true : false;
+    }
+
+    /* RESPONSIVE GRID EVENTS HANDLERS */
+
+    _handleOnLayoutChange (currentLayout) {
+        this.setState({
+            currentLayout: currentLayout
+        });
     }
 
     _hanleOnBreakpointChange (newBreakpoint, newCols) {
         this.setState({
-            isLayoutSmall: (newBreakpoint !== LAYOUT_BREAKPOINTS_KEYS.md && newBreakpoint !== LAYOUT_BREAKPOINTS_KEYS.lg) ? true : false,
+            currentLayoutBreakpoint: newBreakpoint
         });
     };
 
-    _handleOnResizeStop (layout, oldItem, newItem, placeholder, e, element) {
-        this.setState({
-            layoutStateAfterResize: layout
-        });
-    }
-
-    _hasWidgetBeenResizedToHalf (WIDGET_KEY) {
-        if (this.state.layoutStateAfterResize.length) {
-            return this.state.layoutStateAfterResize.find(el => { return el.i === WIDGET_KEY }).w < 7;
-        }
-    }
+    /* COMPONENT LIFECYCLE HOOKS */
 
     render() {
         const { archLayersData, bulletsPieChartData,  chordDiagramData } = this.props;
@@ -49,14 +67,14 @@ class MyGridLayout extends Component {
                     cols={GRID_LAYOUT_CONFIG.COLS}
                     margin={GRID_LAYOUT_CONFIG.MARGIN}
                     onBreakpointChange={this._hanleOnBreakpointChange.bind(this)}
-                    onResizeStop={this._handleOnResizeStop.bind(this)}>
+                    onLayoutChange={this._handleOnLayoutChange.bind(this)}>
 
                     <div className="widget" key={WIDGET_KEYS.ARCHMAP}>
                         <ArchMap data={archLayersData.data} conf={archLayersData.conf}/>
                     </div>
 
                     <div className="widget" key={WIDGET_KEYS.BULLETSPIE}>
-                        <BulletsPieChart data={bulletsPieChartData.data} conf={bulletsPieChartData.conf} isLayoutSmall={this.state.isLayoutSmall} hasBeenResizedToSmall={this._hasWidgetBeenResizedToHalf(WIDGET_KEYS.BULLETSPIE)}/>
+                        <BulletsPieChart data={bulletsPieChartData.data} conf={bulletsPieChartData.conf} piesDisabled={this._getPieChartHiddenState()}/>
                     </div>
 
                     <div className="widget" key={WIDGET_KEYS.CHORDDIAGRAM}>
