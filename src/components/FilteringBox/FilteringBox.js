@@ -31,7 +31,7 @@ class FilteringBox extends Component {
             <div className="filtering-box-container">
                 <p className="filtering-box-title"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua  </p>
 
-                {/* CHECKBOXES & SELECT */}
+                {/* CHECKBOXES & SELECT */} 
                 <div className="filter-components-container">
                     {/* FROM */}
                     <FilteringRadio

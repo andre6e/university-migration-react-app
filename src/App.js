@@ -43,38 +43,36 @@ class App extends Component {
   handleSelectFromOptions (value) {
     this.setState({
       FROM_SELECTED_LIST: value
-    }, () => { this._executeQuery() });
+    });
   };
 
   handleSelectToOptions (value) {
     this.setState({
       TO_SELECTED_LIST: value
-    }, () => { this._executeQuery() });
+    });
   };
 
   /* RANGE SLIDER */
   handleSliderValueChange (value) {
     this.setState({
       SLIDER_VALUE: value
-    }, () => { this._executeQuery() });
+    });
   }
 
-  _executeQuery(forceSearch) {
-    if (forceSearch === true) {
-      // faccio la query e poi setto lo stato con i dati risultanti
+  _executeQuery() {
+    // faccio la query e poi setto lo stato con i dati risultanti
 
-      // LA QUERY DA FAR PARTIRE SOLO SE è DIFFERENTE DALL'ULTIMA
+    // LA QUERY DA FAR PARTIRE SOLO SE è DIFFERENTE DALL'ULTIMA
 
-      this.setState({
-        ARCH_LAYERS_DATA: archLayersData,
-        BULLETS_PIE_CHART_DATA: bulletsPieChartData,
-        CHORD_MOCK_DATA: chordMockData,
-  
-        // ARCH_LAYERS_DATA: emptyArchLayersData,
-        // BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
-        // CHORD_MOCK_DATA: chordEmptyData,
-      })
-    }
+    this.setState({
+      ARCH_LAYERS_DATA: archLayersData,
+      BULLETS_PIE_CHART_DATA: bulletsPieChartData,
+      CHORD_MOCK_DATA: chordMockData,
+
+      // ARCH_LAYERS_DATA: emptyArchLayersData,
+      // BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
+      // CHORD_MOCK_DATA: chordEmptyData,
+    })
   };
 
   /* COMPONENT LIFECYCLE HOOKS */
@@ -110,8 +108,8 @@ class App extends Component {
           sliderValue = {this.state.SLIDER_VALUE}
           onSliderValueChange = {this.handleSliderValueChange.bind(this)}
 
-          // Search button click -> Execute query
-          onSearchButtonClick = {this._executeQuery.bind(this, true)}
+          // Search button click
+          onSearchButtonClick = {this._executeQuery.bind(this)}
         />
 
         <MyGridLayout 
