@@ -54,11 +54,21 @@ class MyGridLayout extends Component {
         });
     };
 
+    _isDraggerHandleVisible (WIDGET_KEY) {
+        const widgetState = this._getWidgetCurrentState(WIDGET_KEY);
+
+        if (widgetState) {
+            return widgetState.hasOwnProperty("static") ? !widgetState.static : true;
+        }
+
+        return false;
+    }
+
     /* COMPONENT LIFECYCLE HOOKS */
 
     render() {
         const { archLayersData, bulletsPieChartData,  chordDiagramData, tableListData } = this.props;
-        
+
         return (
             <div className="gridLayoutContainer">
                 <ResponsiveGridLayout 
@@ -76,17 +86,17 @@ class MyGridLayout extends Component {
                     </div>
 
                     <div className="widget" key={WIDGET_KEYS.BULLETSPIE}>
-                        <WidgetDraggableHandle/>
+                        { this._isDraggerHandleVisible(WIDGET_KEYS.BULLETSPIE) && <WidgetDraggableHandle/> }
                         <BulletsPieChart data={bulletsPieChartData.data} conf={bulletsPieChartData.conf} piesDisabled={this._getPieChartHiddenState()}/>
                     </div>
 
                     <div className="widget" key={WIDGET_KEYS.CHORDDIAGRAM}>
-                        <WidgetDraggableHandle/>
+                        { this._isDraggerHandleVisible(WIDGET_KEYS.CHORDDIAGRAM) && <WidgetDraggableHandle/> }
                         <ChordDiagram data={chordDiagramData.data} conf={chordDiagramData.conf}/>
                     </div>
 
                     <div className="widget" key={WIDGET_KEYS.TABLELIST}>
-                        <WidgetDraggableHandle/>
+                        { this._isDraggerHandleVisible(WIDGET_KEYS.TABLELIST) && <WidgetDraggableHandle/> }
                         <TableList data={tableListData.data}/>
                     </div>
                 </ResponsiveGridLayout>
