@@ -14,7 +14,8 @@ export const RANGE_SLIDER_DEF_VALUE = {
 const _WIDGET_KEYS = {
   ARCHMAP: "ARCHMAP",
   BULLETSPIE: "BULLETSPIE",
-  CHORDDIAGRAM: "CHORDDIAGRAM"
+  CHORDDIAGRAM: "CHORDDIAGRAM",
+  TABLELIST: "TABLELIST"
 };
 
 export const WIDGET_KEYS = _WIDGET_KEYS;
@@ -23,27 +24,32 @@ const LAYOUTS = {
     LG: [
         {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 12, h: 3, static: true},
         {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 12, h: 3, minH: 2, minW: 3},
-        {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 12, h: 3, minH: 2, minW: 3}
+        {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 12, h: 3, minH: 2, minW: 3},
+        {i: _WIDGET_KEYS.TABLELIST, x: 0, y: 9, w: 12, h: 3, minH: 2, minW: 3}
     ],
     MD: [
         {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 10, h: 3, static: true},
         {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 10, h: 3, minW: 3},
-        {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 10, h: 3, minW: 3}
+        {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 10, h: 3, minW: 3},
+        {i: _WIDGET_KEYS.TABLELIST, x: 0, y: 9, w: 10, h: 3, minW: 3}
     ],
     SM: [
         {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 6, h: 3, static: true},
         {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 6, h: 3, static: true},
-        {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 6, h: 3, static: true}
+        {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 6, h: 3, static: true},
+        {i: _WIDGET_KEYS.TABLELIST, x: 0, y: 9, w: 6, h: 3, static: true}
     ],
     XS: [
       {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 4, h: 3, static: true},
       {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 4, h: 3, static: true},
-      {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 4, h: 3, static: true}
+      {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 4, h: 3, static: true},
+      {i: _WIDGET_KEYS.TABLELIST, x: 0, y: 9, w: 4, h: 3, static: true}
     ],
     XXS: [
       {i: _WIDGET_KEYS.ARCHMAP, x: 0, y: 0, w: 2, h: 3, static: true},
       {i: _WIDGET_KEYS.BULLETSPIE, x: 0, y: 3, w: 2, h: 3, static: true},
-      {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 2, h: 3, static: true}
+      {i: _WIDGET_KEYS.CHORDDIAGRAM, x: 0, y: 6, w: 2, h: 3, static: true},
+      {i: _WIDGET_KEYS.TABLELIST, x: 0, y: 9, w: 2, h: 3, static: true},
     ]
 };
 
@@ -83,6 +89,8 @@ export const GRID_LAYOUT_CONFIG = {
     // 439 > xs < 489,
     // xxs < 439
 };
+
+export const GRID_HANDLER_CLASS = 'react-grid-dragHandleExample';
 
 /* API CONF */
 
@@ -166,6 +174,11 @@ export const emptyArchLayersData = {
       visibleRegions: []
     }
 }
+
+/* TABLE LIST */
+export const TABLE_LIST_MESSAGES = {
+  noData: 'Nessun dato da mostrare'
+};
 
 /* REGIONS LIST */
 

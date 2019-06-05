@@ -600,3 +600,63 @@ export const bulletsPieChartData = {
       PIE_FIELD_NAME: "pie"
   }
 };
+
+const rowInfoTest = [
+    {
+        from : "MT",
+        to: "PZ",
+        tot: 123
+    },
+    {
+        from : "TT",
+        to: "AA",
+        tot: 125
+    },
+    {
+        from : "LL",
+        to: "FT",
+        tot: 200
+    },
+]
+
+/* TABLE LIST */
+export const tableListData = {
+    data: {
+        columns: [
+            { name: 'from', title: 'Da' },
+            { name: 'to', title: 'Verso' },
+            { name: 'tot', title: 'Totale' },
+        ],
+        rows: [
+          { from: "Female", to: "Sandra", tot: "Las Vegas", provincesDetail: [] },
+          { from: "Male", to: "Paul", tot: "Paris", provincesDetail: rowInfoTest },
+          { from: "Male", to: "Mark", tot: "Paris", provincesDetail: rowInfoTest },
+          { from: "Male", to: "Paul", tot: "Paris", provincesDetail: rowInfoTest },
+          { from: "Female", to: "Linda", tot: "Austin", provincesDetail: rowInfoTest },
+          { from: "Male", to: "Robert", tot: "Las Vegas", provincesDetail: rowInfoTest },
+          { from: "Female", to: "Lisa", tot: "London", provincesDetail: rowInfoTest },
+          { from: "Male", to: "Mark", tot: "Chicago", provincesDetail: rowInfoTest },
+          { from: "Male", to: "Thomas", tot: "Rio de Janeiro", provincesDetail: rowInfoTest },
+          { from: "Male", to: "Robert", tot: "Las Vegas", provincesDetail: rowInfoTest },
+          { from: "Female", to: "Betty", tot: "Paris", provincesDetail: rowInfoTest },
+          { from: "Male", to: "Robert", tot: "Los Angeles", provincesDetail: rowInfoTest },
+          { from: "Male", to: "William", tot: "Los Angeles", provincesDetail: rowInfoTest },
+          { from: "Male", to: "Mark", tot: "Austin", provincesDetail: rowInfoTest }
+        ]
+    }
+};
+
+export const tableListData2 = {
+    data: {
+        columns: [
+        //   { name: 'name', title: 'Name' },
+        //   { name: 'sex', title: 'Sex' },
+        //   { name: 'city', title: 'City' },
+        //   { name: 'car', title: 'Car' }
+        ],
+        rows: [
+        //   { sex: "Female", name: "Sandra", city: "Las Vegas", car: "Audi A4" },
+          
+        ]
+    }
+};

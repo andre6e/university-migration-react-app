@@ -1,0 +1,21 @@
+/* NECESSARI MA DIPENDONO DALLA LIBRERIA POTREBBERO SPACCARSI */
+.tableListComponentContainer,
+.tableListComponentContainer table,
+.tableListComponentContainer table > tbody,
+.tableListComponentContainer > div:first-of-type {
+    height: 100%;
+}
+
+/* .tableListComponentContainer table * { */
+.tableListComponentContainer div * {
+    font-family: 'Nunito', sans-serif;
+}
+
+.tableListComponentContainer table th {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tableListComponentContainer table td {
+    font-size: 16px;
+}

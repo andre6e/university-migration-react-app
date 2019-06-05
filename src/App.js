@@ -9,7 +9,7 @@ import '../node_modules/react-grid-layout/css/styles.css';
 import '../node_modules/react-resizable/css/styles.css';
 
 // Mock
-import { archLayersData, chordMockData, bulletsPieChartData } from './mock/mock';
+import { archLayersData, chordMockData, bulletsPieChartData, tableListData, tableListData2 } from './mock/mock';
 
 // Constants
 import { emptyArchLayersData, chordEmptyData, bulletsPieChartEmptyData, regionsListMock , RANGE_SLIDER_DEF_VALUE} from './constants/constants';
@@ -28,6 +28,7 @@ const initialState = {
   ARCH_LAYERS_DATA: emptyArchLayersData,
   BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
   CHORD_MOCK_DATA: chordEmptyData,
+  TABLE_LIST_DATA: tableListData,
 
   // ARCH_LAYERS_DATA: archLayersData,
   // BULLETS_PIE_CHART_DATA: bulletsPieChartData,
@@ -66,7 +67,7 @@ class App extends Component {
       TO: this.state.TO_SELECTED_LIST.sort(),
       TIME_RANGE: this.state.SLIDER_VALUE
     };
-    
+
     if (!Utils.isLastQueryEqualToCurrentOne(this.state.LAST_QUERY, currentQuery)) {
       this._executeQuery(currentQuery)
     }
@@ -86,6 +87,7 @@ class App extends Component {
       ARCH_LAYERS_DATA: archLayersData,
       BULLETS_PIE_CHART_DATA: bulletsPieChartData,
       CHORD_MOCK_DATA: chordMockData,
+      TABLE_LIST_DATA: tableListData2,
       LAST_QUERY: query
   
       // ARCH_LAYERS_DATA: emptyArchLayersData,
@@ -136,6 +138,8 @@ class App extends Component {
           bulletsPieChartData = {this.state.BULLETS_PIE_CHART_DATA}
           // Chord Diagram
           chordDiagramData = {this.state.CHORD_MOCK_DATA}
+          // Table List
+          tableListData = {this.state.TABLE_LIST_DATA}
         />
       </div>
     );
