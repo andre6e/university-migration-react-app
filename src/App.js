@@ -9,10 +9,10 @@ import '../node_modules/react-grid-layout/css/styles.css';
 import '../node_modules/react-resizable/css/styles.css';
 
 // Mock
-import { archLayersData, chordMockData, bulletsPieChartData, tableListData, tableListData2 } from './mock/mock';
+import { archLayersData, chordMockData, bulletsPieChartData, tableListData } from './mock/mock';
 
 // Constants
-import { emptyArchLayersData, chordEmptyData, bulletsPieChartEmptyData, regionsListMock , RANGE_SLIDER_DEF_VALUE} from './constants/constants';
+import { emptyArchLayersData, chordEmptyData, bulletsPieChartEmptyData, emptyTableListData, regionsListMock , RANGE_SLIDER_DEF_VALUE} from './constants/constants';
 
 // import * as ApiService from './utils/ApiService';
 import * as Utils from './utils/Utils';
@@ -28,7 +28,7 @@ const initialState = {
   ARCH_LAYERS_DATA: emptyArchLayersData,
   BULLETS_PIE_CHART_DATA: bulletsPieChartEmptyData,
   CHORD_MOCK_DATA: chordEmptyData,
-  TABLE_LIST_DATA: tableListData,
+  TABLE_LIST_DATA: emptyTableListData,
 
   // ARCH_LAYERS_DATA: archLayersData,
   // BULLETS_PIE_CHART_DATA: bulletsPieChartData,
@@ -87,7 +87,7 @@ class App extends Component {
       ARCH_LAYERS_DATA: archLayersData,
       BULLETS_PIE_CHART_DATA: bulletsPieChartData,
       CHORD_MOCK_DATA: chordMockData,
-      TABLE_LIST_DATA: tableListData2,
+      TABLE_LIST_DATA: tableListData,
       LAST_QUERY: query
   
       // ARCH_LAYERS_DATA: emptyArchLayersData,

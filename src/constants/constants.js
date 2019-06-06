@@ -176,9 +176,17 @@ export const emptyArchLayersData = {
 }
 
 /* TABLE LIST */
-export const TABLE_LIST_MESSAGES = {
-  noData: 'Nessun dato da mostrare'
+export const emptyTableListData = {
+  data: {
+      columns: [],
+      rows: []
+  }
 };
+
+// La libreria crea in automatico due th, di conseguenza per avere il td su tutta la tabella ha bisogno di colspan = 2
+export const EMPTY_TABLE_RESULT_COLSPAN_DEFAULT = 2;
+export const EMPTY_TABLE_LIST_MESSAGES = 'Nessun risultato';
+// export const EMPTY_TABLE_LIST_MESSAGES = 'Nessun dato da mostrare';
 
 /* REGIONS LIST */
 

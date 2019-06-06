@@ -16,7 +16,7 @@ import {
 
 import './TableList.css';
 
-import { TABLE_LIST_MESSAGES } from '../../constants/constants';
+import { EMPTY_TABLE_LIST_MESSAGES, EMPTY_TABLE_RESULT_COLSPAN_DEFAULT } from '../../constants/constants';
 
 // Necessari per mantenere lo stato (al cambiare del grid layout breakpoint il costruttore viene richiamato e ri-setterebbe a 0)
 let REF_EXPANDED_ROW_IDS = [],
@@ -41,6 +41,12 @@ const RowDetail = ({ row }) => {
       </div>
     )
 };
+
+const noDataRowComponent = () => (
+  <tr className="noDataRowComponent">
+    <td colSpan={EMPTY_TABLE_RESULT_COLSPAN_DEFAULT}> {EMPTY_TABLE_LIST_MESSAGES} </td>
+  </tr>
+)
 
 class TableList extends Component {
   constructor(props) {
@@ -111,12 +117,12 @@ class TableList extends Component {
               onCurrentPageChange={this._handleCurrentPageChanged.bind(this)}
             />
             <IntegratedPaging />
-            <Table messages={TABLE_LIST_MESSAGES}/>
-            <TableHeaderRow />
+            <Table noDataRowComponent={noDataRowComponent}/>
+            <TableHeaderRow /> 
             <TableRowDetail
               contentComponent={RowDetail}
             />
-            <PagingPanel />
+            <PagingPanel/>
           </Grid>
       </div>
     );

@@ -646,17 +646,3 @@ export const tableListData = {
     }
 };
 
-export const tableListData2 = {
-    data: {
-        columns: [
-        //   { name: 'name', title: 'Name' },
-        //   { name: 'sex', title: 'Sex' },
-        //   { name: 'city', title: 'City' },
-        //   { name: 'car', title: 'Car' }
-        ],
-        rows: [
-        //   { sex: "Female", name: "Sandra", city: "Las Vegas", car: "Audi A4" },
-          
-        ]
-    }
-};
